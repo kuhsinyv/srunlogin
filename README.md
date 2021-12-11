@@ -2,6 +2,15 @@
 一个简单的南昌大学校园网自动登录实现
 目前是通过 Chrome DP 操作的，方便维护。后续增加通过 net/http 方式。
 
+## 使用说明
+
+### Windows
+- 下载 `release` 中相应的压缩包（如 `srunlogin_windows_amd64.zip`），解压后，根据说明编辑 `configs` 目录下的 `config.ini` 文件，双击 `srunlogin.exe` 即可运行（需要安装 Google Chrome 浏览器）。
+- 添加到开机启动项
+  - 为 `srunlogin.exe` 生成快捷方式；
+  - 打开 `文件资源管理器`，在地址栏输入 `shell:startup`，回车进入；
+  - 将第一步生成的快捷方式放到该目录下即可。
+
 ## 配置文件说明
 ```ini
 [account]

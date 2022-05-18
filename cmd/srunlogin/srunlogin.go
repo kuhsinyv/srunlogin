@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/kuhsinyv/srunlogin/internal/pkg/command"
+	"github.com/kuhsinyv/srunlogin/internal/srunlogin/command"
 )
 
 func main() {

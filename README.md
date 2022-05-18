@@ -6,14 +6,14 @@
 
 ### Windows
 
-- 下载 `release` 中相应的压缩包（如 `srunlogin-windows-amd64.zip`）。
+- 下载 `release` 中相应的压缩包（如 `srunlogin-windows-amd64-<version>.zip`）。
 
-- 解压后，根据说明编辑 `config.yaml` 文件，双击 `srunlogin-windows-amd64.exe`
+- 解压到想要存放的位置后，根据说明编辑 `config.yaml` 文件，右击 `srunlogin-windows-amd64-<version>.exe`，生成快捷方式。
   即可运行。（如果使用 CDP，则需要安装 Google Chrome 浏览器。）
 
-- 添加到开机启动项。
+- 右击上述生成的快捷方式，依次点击“属性” - “快捷方式” - “目标”，编辑 “目标” 为：`cmd.exe /c "start srunlogin-windows-amd64-<version>.exe"`。
 
-    - 为 `srunlogin-windows-amd64.exe` 生成快捷方式；
+- 添加到开机启动项。
 
     - 打开 `文件资源管理器`，在地址栏输入 `shell:startup`，回车进入；
 

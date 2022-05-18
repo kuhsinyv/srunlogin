@@ -3,8 +3,8 @@
 DIR=releases/srunlogin-windows-amd64-"$1"
 EXEC=srunlogin-windows-amd64-"$1".exe
 
-if [ ! -d DIR ]; then
-  mkdir DIR
+if [ ! -d "${DIR}" ]; then
+  mkdir -p "${DIR}"
 fi
 
 CGO_ENABLED=0 GOOS=windows GOARCH=amd64 \

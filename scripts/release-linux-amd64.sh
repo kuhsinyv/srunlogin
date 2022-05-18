@@ -5,8 +5,8 @@ EXEC=srunlogin-linux-amd64-"$1".exe
 
 echo "Building ${EXEC}"
 
-if [ ! -d DIR ]; then
-  mkdir DIR
+if [ ! -d "${DIR}" ]; then
+  mkdir -p "${DIR}"
 fi
 
 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \

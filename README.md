@@ -1,60 +1,73 @@
-# srunlogin
-一个简单的南昌大学校园网自动登录实现
-目前是通过 Chrome DP 操作的，方便维护。后续增加通过 net/http 方式。
+# SrunLogin
+
+一个简单的南昌大学校园网自动登录器的实现。
 
 ## 使用说明
 
 ### Windows
-- 下载 `release` 中相应的压缩包（如 `srunlogin_windows_amd64.zip`），解压后，根据说明编辑 `configs` 目录下的 `config.ini` 文件，双击 `srunlogin.exe` 即可运行（需要安装 Google Chrome 浏览器）。
-- 添加到开机启动项
-  - 为 `srunlogin.exe` 生成快捷方式；
-  - 打开 `文件资源管理器`，在地址栏输入 `shell:startup`，回车进入；
-  - 将第一步生成的快捷方式放到该目录下即可。
+
+- 下载 `release` 中相应的压缩包（如 `srunlogin-windows-amd64.zip`）。
+
+- 解压后，根据说明编辑 `config.yaml` 文件，双击 `srunlogin-windows-amd64.exe`
+  即可运行。（如果使用 CDP，则需要安装 Google Chrome 浏览器。）
+
+- 添加到开机启动项。
+
+    - 为 `srunlogin-windows-amd64.exe` 生成快捷方式；
+
+    - 打开 `文件资源管理器`，在地址栏输入 `shell:startup`，回车进入；
+
+    - 将上面步骤中生成的快捷方式放到该目录下即可。
 
 ## 配置文件说明
-```ini
-[account]
-# 账号
-username = 1234567890
 
-# 密码
-password = 123456
-
-# 运营商
-# 校园网：@ncu；移动：@cmcc；联通：@unicom；电信：@ndcard。
-domain = @unicom
-
-[app]
-# 用于判断连接的网络是 NCUWLAN，还是 NCU-2.4G / NCU-5G
-# 必须设置为非强制使用 https 的网站
-# 使用 http://baidu.com/ 亦可。
-test_url = http://example.com/
-
-# 运行方式
-# 使用 chromedp，需要安装 Google Chrome 浏览器。
-solution = cdp
-
-# 当运行方式为 cdp 时，是否显示窗口
-# true：显示，false：不显示
-display = true
-
-# 延后执行时间
-# 示例：500ms，10s，1m30s
-delay = 10s
-
-# 重试次数
-# 设置为 0 时，只执行 1 次。
-retry = 3
-
-# 每次执行的超时限制
-# 最小值为 15s
-timeout = 15s
-
-# 是否显示 CDP 执行任务日志
-# true：显示，false：显示
-log_enabled = true
-
-# 删除可能被自动创建的快捷方式
-# 留空则不删除
-delete_lnk_path = C:\Users\xxx\Desktop\Google Chrome.lnk
+```yaml
+account:
+  isp: <isp> # 运营商名称，可设置为 ncu、cmcc、unicom 或者 ndcard。具体参考“运营商名称说明”
+  password: <password> # 帐号
+  username: <username> # 密码
+app:
+  solution: cdp # 使用 Chrome DP
+  test-url: http://www.baidu.com # 用于被校园网重定向到登录页面，请不要设置为能够在不登录的情况下还能解析的域名
+  timeout: 60s # 每次尝试登录的超时时间
+  retry: 3 # 最小有效值为 1
+cdp:
+  flags: # 设置参考 https://pkg.go.dev/github.com/chromedp/chromedp
+    headless: true # 设置为 ture 则不打开浏览器窗口
+    hide-scrollbars: true
+    mute-audio: true
+    no-default-browser-check: true # 可能需要设置 headless 为 true 才有效
 ```
+
+### 运营商名称说明
+
+| 运营商  | `account.isp` |
+|:----:|:-------------:|
+| 校园网  |     `ncu`     |
+| 中国移动 |    `cmcc`     |
+| 中国联通 |   `unicom`    |
+| 中国电信 |   `ndcard`    |
+
+### 使用环境变量覆盖配置
+
+- 环境变量开头统一为 `SRUN`。
+
+- 环境变量中节点间的分隔符为 `_`。
+
+- 例子：
+
+|        配置名         |          环境变量           |
+|:------------------:|:-----------------------:|
+|   `account.isp`    |   `SRUN_ACCOUNT_ISP`    |
+| `account.username` | `SRUN_ACCOUNT_USERNAME` |
+| `account.password` | `SRUN_ACCOUNT_PASSWORD` |
+
+### 其他配置文件路径
+
+优先级从高到底：
+
+- `<程序所在路径>`
+
+- `<用户主目录>/.config/srunlogin`
+
+- `<用户主目录>/.srunlogin`

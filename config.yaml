@@ -1,15 +1,15 @@
 account:
-  isp: <isp> # 运营商名称，可设置为 ncu、cmcc、unicom 或者 ndcard。具体参考“运营商名称说明”
-  password: <password> # 帐号，如：6109110000
-  username: <username> # 密码，如：abc123456
+  isp: <isp> # 运营商名称，可设置为 ncu、cmcc、unicom 或者 ndcard。具体参考“运营商名称说明”。
+  username: <username> # 帐号，如：6109110000。
+  password: <password> # 密码，如：abc123456。
 app:
-  solution: cdp # 使用 Chrome DP
-  test-url: http://www.baidu.com # 用于被校园网重定向到登录页面，请不要设置为能够在不登录的情况下还能解析的域名
-  timeout: 60s # 每次尝试登录的超时时间
-  retry: 3 # 最小有效值为 1
+  solution: cdp # 使用 Chrome DP。
+  test-url: http://www.baidu.com # 用于被校园网重定向到登录页面，请不要设置为能够在不登录的情况下还能解析的域名。
+  timeout: 60s # 每次尝试登录的超时时间。
+  retry: 3 # 最小有效值为 1。
 cdp:
-  flags: # 设置参考 https://pkg.go.dev/github.com/chromedp/chromedp
-    headless: true # 设置为 ture 则不打开浏览器窗口
+  flags: # 设置参考 https://pkg.go.dev/github.com/chromedp/chromedp。
+    headless: true # 设置为 true 则不打开浏览器窗口。
     hide-scrollbars: true
     mute-audio: true
-    no-default-browser-check: true # 可能需要设置 headless 为 true 才有效
+    no-default-browser-check: true # 可能需要设置 headless 为 true 才有效，如果打开窗口运行，可能会在桌面添加图标。
